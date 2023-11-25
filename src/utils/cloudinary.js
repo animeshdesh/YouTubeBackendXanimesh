@@ -31,3 +31,5 @@ cloudinary.v2.uploader.upload(
     console.log(result);
   }
 );
+
+export { uploadOnCloudinary };
