@@ -15,7 +15,7 @@ const registerUser = asyncHandler(async (req, res) => {
   //check for user creation
   //return res
 
-  const { fullname, email, username, password } = req.body;
+  const { fullName, email, username, password } = req.body;
   console.log(email, " email");
 
   //   if (fullname === "") {
@@ -24,13 +24,13 @@ const registerUser = asyncHandler(async (req, res) => {
   //Individually we can check there is no issue with this
   //alternate more pro way to the same is below
   if (
-    [fullname, email, username, password].some((field) => field?.trim() === "")
+    [fullName, email, username, password].some((field) => field?.trim() === "")
   ) {
     throw new ApiError(400, "All field are required");
   }
   //Checking below if user already exist in DB
 
-  const existedUser = User.findOne({
+  const existedUser = await User.findOne({
     $or: [{ username }, { email }],
   });
   //If exisited then we are throwing error
