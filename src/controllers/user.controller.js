@@ -202,7 +202,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 const changeCurrentPassword = asyncHandler(async (req, res) => {
   const { oldPassword, newPassword } = req.body;
 
-  const user = await User.findById(req.user?._idid);
+  const user = await User.findById(req.user?._id);
   const isPasswordCorrect = await user.isPasswordCorrect(oldPassword);
 
   if (!isPasswordCorrect) {
@@ -266,7 +266,7 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
   ).select("-password");
   return res
     .status(200)
-    .json(ApiResponse(200, user, "Avater changed successfully"));
+    .json(new ApiResponse(200, user, "Avater changed successfully"));
 });
 const updateUserCoverImage = asyncHandler(async (req, res) => {
   const CoverImageLocalpath = req.file?.path;
@@ -290,7 +290,7 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
   ).select("-password");
   return res
     .status(200)
-    .json(ApiResponse(200, user, "Changed cover Image succesfully"));
+    .json(new ApiResponse(200, user, "Changed cover Image succesfully"));
 });
 
 const getUserChannelProfile = asyncHandler(async (req, res) => {
